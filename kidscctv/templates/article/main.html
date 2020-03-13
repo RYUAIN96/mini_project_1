@@ -1,0 +1,68 @@
+{% include "../header.html" %}
+
+{% include "../navbar.html" %}
+
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>기사 목록</h1>
+      <p class="lead text-muted">'어린이 보호구역' 관련 기사입니다.</p>      
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for one in list %}             
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+
+            <img src="{{one.thumbnail_i}}" width="100%" height="225">
+
+            <div class="card-body">
+              <p class="card-text"><strong>{{ one.title }} </strong></p>
+              <p class="card-text">{{ one.content }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" ><a href={{one.link}}>기사 보기</a></button>
+                  {% if one.no in scr_no_list %}
+                    <button onclick="location.href='/cctv/article/unscrap?no={{one.no}}&page={{page}}'" 
+                      type="button" class="btn btn-danger" >unscrap</button>
+                  {% else %}
+                    <button onclick="location.href='/cctv/article/scrap?no={{one.no}}&page={{page}}'" 
+                      type="button" class="btn btn-success" >scrap</button>
+                  {% endif %}
+                </div>
+                <small class="text-muted">{{one.report}} <br>{{one.pub_date}}</small>
+                </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+ </div>   
+</main>
+
+<div class="row justify-content-center">
+  <nav aria-label="Page navigation example">
+      <ul class="pagination">
+          {% for i in pages %}
+          <li class="page-item">
+              <a class="page-link" href="/cctv/article/main?page={{i}}">{{i}}</a>
+          </li>
+          {% endfor %}                    
+      </ul>
+  </nav>
+</div>   
+
+<footer class="text-muted">
+  <div class="container" style="margin-bottom: 50px;">
+    <p class="float-right">
+      <button onclick="location.href='#'" type="button" class="btn btn-success">Back to top</button>
+
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script></body>
+</html>

@@ -1,1 +1,2 @@
-# mini_project_1
+# cctv_kids
+mini_project
